@@ -16,7 +16,12 @@ This is a clone of ThumbSense.
 
 
 ## Demo
+![](https://raw.github.com/wiki/sago35/tsense-ahk/images/tsense-ahk-demo.gif)
 
+ 1. click left mouse button with 'F'
+ 2. key 'z' : move window without drag title bar
+ 3. key 'x' : resize window without drag window edge
+ 
 ## VS. Original version
 
 [original](https://www.sonycsl.co.jp/person/rekimoto/tsense/indexj.html) (japanese only)

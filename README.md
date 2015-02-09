@@ -37,6 +37,7 @@ Cons.
 
 ## Requirement
 
+ * Windows 7 or later
  * AutoHotkey v1.0 or later
 
 ## Usage

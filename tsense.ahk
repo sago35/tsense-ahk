@@ -258,8 +258,16 @@ ToggleMaximize(maximizeLevel = 0) {
 ; ----------------------------------------------------------------------------
 TsenseClockLoop:
     FormatTime, now_time, , yy/MM/dd ddd HH:mm:ss
-    WinGetTitle, now_active_window, A
-    GuiControl, , NowTime, %now_time% | %now_active_window%
+    WinGet, WID, ID, A
+    WinGetPos, X, Y, W, H, ahk_id %WID%
+    if (X >= 0) {
+        X = +%X%
+    }
+    if (Y >= 0) {
+        Y = +%Y%
+    }
+    WinGetTitle, now_active_window, ahk_id %WID%
+    GuiControl, , NowTime, %now_time% | (%W%x%H%%X%%Y%) %now_active_window%
     return
 
 TsenseClockStop:

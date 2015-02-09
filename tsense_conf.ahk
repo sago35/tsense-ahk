@@ -19,28 +19,6 @@ p::Send, {WheelUp}
 +n::Send, {PgDn}
 +p::Send, {PgUp}
 i::Tab
-Space::WinActivate, ahk_class Shell_TrayWnd
-.::
-    Send, #^!{F9}
-    WinGet, WID, LIST, ahk_class CLaunch_MemoWnd
-    Loop, %WID% {
-        this_id := WID%A_Index%
-        WinRestore, ahk_id %this_id%
-        WinActivate, ahk_id %this_id%
-    }
-    return
-
-; vkBCsc033 => ,
-vkBCsc033::Send, #^!{F10}
-
-F1::
-    Run, local\etc\AutoHotkey.chm
-    return
-
-; vkBAsc028 => :
-;vkBAsc028::Run, ..\fenrir\fenrir.exe /t, ..\fenrir\
-;vkBAsc028::Run, ..\fenrir\fenrir.exe /pathfile=%USERPROFILE%\fenrir.path, ..\fenrir\
-vkBAsc028::Run, ..\fenrir\fenrir.exe, ..\fenrir\
 
 f::LButton
 d::RButton

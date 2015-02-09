@@ -1,13 +1,10 @@
 DetectHiddenWindows, On
 CoordMode, Mouse, Screen
 
-; TsenseModeの初期化
 InitTsenseMode()
 
 #include tsense_conf.ahk
 
-; TsenseModeを切り替える
-; TsenseWindowの生成/廃棄により切り替え
 ToggleTsenseMode(i = -1) {
     global NowTime
     static now := 0
@@ -23,7 +20,6 @@ ToggleTsenseMode(i = -1) {
     }
     if (now) {
         CreateTsenseWindow()
-        ;Menu, TRAY, Icon, AutoHotkey.exe, 4
     } else {
         DestroyTsenseWindow()
     }
@@ -32,10 +28,6 @@ ToggleTsenseMode(i = -1) {
 CreateTsenseWindow() {
     global NowTime
     global tsense_bgcolor, tsense_transeparent
-
-    ; Old Version
-    ;Gui, +ToolWindow
-    ;TimedTrayTip("", "Tsense Mode On", 1000)
 
     __tsense_mode_font_size := 10
     __tsense_mode_gui_h := A_ScreenHeight - __tsense_mode_font_size - 8
@@ -52,23 +44,18 @@ CreateTsenseWindow() {
     SetTimer, TsenseClockStop, 1000
 }
 
-; 50ms周期のTsenseWindow廃棄処理
 DestroyTsenseWindow() {
     SetTimer, DestroyTsenseWindowWatch, 50
 }
 
-; TsenseWindow廃棄処理
 DestroyTsenseWindowWatch:
     If (isTsenseModeQuitOK()) {
         Gui, Destroy
-        ;TimedTrayTip("", "Tsense Mode Off", 1000)
         Menu, TRAY, Icon, AutoHotkey.exe, 2
         SetTimer, DestroyTsenseWindowWatch, Off
     }
     return
 
-; TsenseModeの初期化
-; 必ずコールする必要あり
 InitTsenseMode() {
     TsenseModeQuitOK()
     InitMouseWheelEmu()
@@ -76,19 +63,16 @@ InitTsenseMode() {
     InitEasyWindowResize()
 }
 
-; TsenseModeQuitNGでかけたロックを解除
 TsenseModeQuitOK() {
     global tsense_mode_quit_ok
     tsense_mode_quit_ok := 1
 }
 
-; TsenseModeの終了を禁止する
 TsenseModeQuitNG() {
     global tsense_mode_quit_ok
     tsense_mode_quit_ok := 0
 }
 
-; TsenseModeを終了していいか？
 isTsenseModeQuitOK() {
     global tsense_mode_quit_ok
     return tsense_mode_quit_ok
@@ -120,7 +104,6 @@ esmb_TriggerKeyDown:
 esmb_TriggerKeyUp:
     TsenseModeQuitOK()
     esmb_KeyDown = n
-    ;MouseMove, origX, origY, 0
     origX := -1
     origY := -1
     return
@@ -130,7 +113,6 @@ esmb_CheckForScrollEventAndExecute:
         return
 
     MouseGetPos,, esmb_NewY
-    ;MouseMove, esmb_OldX, esmb_OldY
     esmb_Distance := esmb_NewY - esmb_OldY
 
     ;; Do not send clicks on the first iteration
@@ -223,16 +205,15 @@ EWD_WatchMouse:
 ; ----------------------------------------------------------------------------
 ; ToggleMaximize
 ; ----------------------------------------------------------------------------
-; maximizeLevel = 0 : 普通の最大化
-; maximizeLevel = 1 : Taskbarを残して最大化
-; maximizeLevel = 2 : 完全に最大化
+; maximizeLevel = 0 : normal maximize
+; maximizeLevel = 1 : maximize without title bar
+; maximizeLevel = 2 : maximize without title bar and task bar
 ToggleMaximize(maximizeLevel = 0) {
     WinGet, WID, ID, A
     WinGet, isMaximize, MinMax, ahk_id %WID%
     WinGet, myStyle, Style, ahk_id %WID%
     if (isMaximize == 1 && (maximizeLevel == 0 || myStyle & 0x00C40000 == 0)) {
         WinRestore, ahk_id %WID%
-        ;PostMessage, 0x112, 0xF120,,, ahk_id %WID% ; WinRestore
         if (maximizeLevel) {
             WinSet, Style, +0x00C40000, ahk_id %WID%
         }
@@ -244,11 +225,11 @@ ToggleMaximize(maximizeLevel = 0) {
             WinSet, Style, -0x00C40000, ahk_id %WID%
 
             if (maximizeLevel == 1) {
-                ; Taskbarを残して最大化
+                ; maximize without title bar
                 SysGet, New, MonitorWorkArea
                 WinMove, ahk_id %WID%, , 0, 0, %NewRight%, %NewBottom%
             } else {
-                ; 完全に最大化
+                ; maximize without title bar and task bar
                 WinMove, ahk_id %WID%, , 0, 0, %A_ScreenWidth%, %A_ScreenHeight%
             }
         }

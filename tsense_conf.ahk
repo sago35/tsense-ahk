@@ -1,12 +1,12 @@
 #IfWinExist, __tsense_mode_win
 
 ; ----------------------------------------------------------------------------
-; TsenseWindowの設定
+; window
 tsense_bgcolor      := "FFFF99"
 tsense_transeparent := 210
 
 ; ----------------------------------------------------------------------------
-; TsenseMode内でのバインド設定
+; key bind
 ^h::MouseMove, -16,   0, 0, R
 ^j::MouseMove,   0,  16, 0, R
 ^k::MouseMove,   0, -16, 0, R
@@ -36,8 +36,8 @@ e::Send, {END}
 v::Send, {LButton}{LButton}
 t::WinGetTitle, clipboard, A
 
-+r::ToggleMaximize(1)
 r::ToggleMaximize(0)
++r::ToggleMaximize(1)
 ^r::ToggleMaximize(2)
 
 z::StartEasyWindowDrag()

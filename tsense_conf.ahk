@@ -1,6 +1,11 @@
 #IfWinExist, __tsense_mode_win
 
 ; ----------------------------------------------------------------------------
+; TsenseWindowの設定
+tsense_bgcolor      := "FFFF99"
+tsense_transeparent := 210
+
+; ----------------------------------------------------------------------------
 ; TsenseMode内でのバインド設定
 ^h::MouseMove, -16,   0, 0, R
 ^j::MouseMove,   0,  16, 0, R

@@ -31,6 +31,7 @@ ToggleTsenseMode(i = -1) {
 
 CreateTsenseWindow() {
     global NowTime
+    global tsense_bgcolor, tsense_transeparent
 
     ; Old Version
     ;Gui, +ToolWindow
@@ -45,8 +46,8 @@ CreateTsenseWindow() {
     Gui, Add, Text, w%A_ScreenWidth% vNowTime
     Gui, Show, hide, __tsense_mode_win
     Gui, Show, x0 y%__tsense_mode_gui_h% NoActivate
-    Gui, Color, FFFF99
-    WinSet, Transparent, 210
+    Gui, Color, %tsense_bgcolor%
+    WinSet, Transparent, %tsense_transeparent%
     GoSub, TsenseClockLoop
     SetTimer, TsenseClockStop, 1000
 }

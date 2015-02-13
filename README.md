@@ -89,7 +89,9 @@ When press MODIFIER-KEY, some keys are modified as below. See tsense_conf.ahk.
 
 ## Install
 
-Add your ahk script.
+Add below to your ahk script.
+If you want to use sample config, rename tsense_conf.ahk.sample to tsense_conf.ahk.
+
 
     #include path_to_tsense_folder
     #include path_to_tsense_folder\tsense.ahk

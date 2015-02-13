@@ -3,7 +3,7 @@ CoordMode, Mouse, Screen
 
 InitTsenseMode()
 
-#include tsense_conf.ahk
+#include *i tsense_conf.ahk
 
 ToggleTsenseMode(i = -1) {
     global NowTime
@@ -29,6 +29,17 @@ CreateTsenseWindow() {
     global NowTime
     global tsense_bgcolor, tsense_transeparent
 
+    bgcolor      := "FFFF99"
+    transeparent := 210
+
+    if (tsense_bgcolor != "") {
+        bgcolor := tsense_bgcolor
+    }
+
+    if (tsense_transeparent != "") {
+        transeparent := tsense_transeparent
+    }
+
     __tsense_mode_font_size := 10
     __tsense_mode_gui_h := A_ScreenHeight - __tsense_mode_font_size - 8
     Gui, +ToolWindow +AlwaysOnTop -Caption +LastFound
@@ -38,8 +49,8 @@ CreateTsenseWindow() {
     Gui, Add, Text, w%A_ScreenWidth% vNowTime
     Gui, Show, hide, __tsense_mode_win
     Gui, Show, x0 y%__tsense_mode_gui_h% NoActivate
-    Gui, Color, %tsense_bgcolor%
-    WinSet, Transparent, %tsense_transeparent%
+    Gui, Color, %bgcolor%
+    WinSet, Transparent, %transeparent%
     GoSub, TsenseClockLoop
     SetTimer, TsenseClockStop, 1000
 }

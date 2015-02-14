@@ -1,7 +1,8 @@
 tsense-ahk
 ================
 
-An ahk script to make your keyboard as a mouse.
+Tsense-ahk is an ahk script to make your keyboard as mouse buttons.
+You can use touchpad and mouse click with home position.
 
 ## Description
 

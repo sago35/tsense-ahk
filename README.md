@@ -43,7 +43,7 @@ Cons.
 
 ## Usage
 
-When press MODIFIER-KEY, some keys are modified as below. See tsense_conf.ahk.
+When press MODIFIER-KEY, some keys are modified as below. See  tsense_conf.ahk.sample.
 
     ; key 'F' : click 'left mouse button'
     f::LButton

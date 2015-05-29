@@ -88,6 +88,12 @@ When press MODIFIER-KEY, some keys are modified as below. See  tsense_conf.ahk.s
     x::StartEasyWindowResize()
     x Up::EndEasyWindowResize()
 
+## Note
+
+### for Synaptics Pointing Device
+
+Turn off `SmartSense` option in Control Panel if your mouse cursor stopped when you press a keyboards.
+
 ## Install
 
 Add below to your ahk script.
